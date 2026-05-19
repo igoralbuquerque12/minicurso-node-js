@@ -5,8 +5,11 @@ const logger = {
     console.log(chalk.green(`✔ ${message}`));
   },
 
-  error(message) {
+  error(message, error) {
     console.error(chalk.red(`✖ ${message}`));
+    if (error) {
+      console.error(chalk.red(error.stack || error.message || String(error)));
+    }
   },
 
   warn(message) {

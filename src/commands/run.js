@@ -148,5 +148,4 @@ export async function  run() {
   } catch (error) {
     logger.error("Erro ao rodar a aplicação:", error);
   }
-  
 }
