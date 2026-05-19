@@ -14,3 +14,5 @@ export async function router(args) {
             break;
     }
 }
+
+process.env.NOME

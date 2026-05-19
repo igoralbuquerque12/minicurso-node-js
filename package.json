@@ -8,7 +8,7 @@
     "doc": "docs"
   },
   "bin": {
-    "minicurso-node": "./bin/cli.js"
+    "vibe-git1": "./bin/cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
