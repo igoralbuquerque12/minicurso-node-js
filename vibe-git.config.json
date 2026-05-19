@@ -1,0 +1,6 @@
+{
+  "aiProvider": "gemini",
+  "modelName": "gemini-2.5-flash",
+  "createPR": true,
+  "prTemplate": "# Summary\nExplain what changed.\n\n# Testing\nExplain how this was tested."
+}

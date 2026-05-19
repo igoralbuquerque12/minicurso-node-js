@@ -320,6 +320,139 @@ git switch main
 
 ---
 
+## git status
+
+**O que faz:** Mostra o estado atual do repositório.
+
+**Sintaxe:**
+```bash
+git status
+```
+
+**O que você vê:**
+```
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  modified:   app.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+  config.env
+
+nothing added to commit but untracked files present (working tree modified)
+```
+
+**Interpretação:**
+
+- **Changes not staged:** Arquivos modificados, mas não adicionados com `git add`
+- **Untracked files:** Arquivos que Git não conhece (novos)
+- **Changes to be committed:** Arquivos na staging area, prontos para commit
+
+**Quando usar:** Sempre que quiser entender o estado atual do seu projeto.
+
+**Resumo:** "Ver o que mudou, o que está staged e o que não está rastreado."
+
+---
+
+## git diff
+
+**O que faz:** Mostra as diferenças entre versões.
+
+**Sintaxe:**
+
+Ver o que mudou mas ainda não foi `git add`:
+```bash
+git diff
+```
+
+Ver o que mudou e já foi `git add`:
+```bash
+git diff --staged
+```
+
+**Exemplo de saída:**
+```diff
+diff --git a/app.js b/app.js
+index 1234567..abcdefg 100644
+--- a/app.js
++++ b/app.js
+@@ -5,6 +5,8 @@
+ console.log("Iniciando...");
+ 
++// novo comentário
++console.log("Configurado");
++
+ app.listen(3000);
+```
+
+Linhas com `+` foram adicionadas.
+Linhas com `-` foram removidas.
+
+**Quando usar:**
+- Revisar o que você alterou antes de commitar
+- Entender exatamente qual mudança foi feita
+- Comparar branches
+
+**Resumo:** "Ver linha por linha o que mudou."
+
+---
+
+## Untracked files
+
+**O que é:**
+
+Um arquivo "untracked" é aquele que Git não está rastreando.
+
+Isso acontece quando:
+- Você cria um novo arquivo
+- Git nunca fez `git add` nele antes
+- Ele não está no `.gitignore`
+
+**Exemplo:**
+
+```bash
+touch config.env
+```
+
+Agora rode:
+```bash
+git status
+```
+
+Você verá:
+```
+Untracked files:
+  config.env
+```
+
+**O que significa:**
+
+Git vê o arquivo, mas **não está monitorando mudanças** nele.
+
+Se você alterar `config.env`, Git não vai rastrear essas mudanças até você rodar `git add config.env`.
+
+**Como rastrear:**
+
+```bash
+git add config.env
+```
+
+Agora Git vai monitorar esse arquivo.
+
+**Quando aparecem:**
+
+- Arquivos novos que você criou
+- Arquivos de dependências (`node_modules` - mas normalmente no `.gitignore`)
+- Arquivos de configuração local
+- Qualquer coisa que você criar manualmente
+
+**Resumo:** "Arquivos que existem mas Git ainda não está observando."
+
+---
+
 # Pull Request (PR)
 # Pull Request (PR)
 
