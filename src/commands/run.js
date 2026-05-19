@@ -1,8 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 import { execSync } from "child_process";
+import { buildPrompt } from "../prompt.js";
 
 import logger from "../logger.js";
+import { AiProvider } from "../ai/ai.factory.js";
 
 function runCommand(command) {
   return execSync(command, {
@@ -101,4 +103,50 @@ function createSafeFileName(branchName) {
   return branchName.replaceAll("/", "-");
 }
 
+export async function  run() {
+  try {
+    logger.info("Lendo configuração e entrada do usuário");
 
+    const config = await readJson("vibe-git.config.json");
+
+    const entry = await readJson("vibe-git/entry/example.json");
+
+    if (!entry.branchName) {
+      throw new Error("O campo 'branchName' é obrigatório");
+    }
+
+    const diff = getGitDiff();
+    const stagedDiff = getStagedGitDiff();
+    const gitStatus = getGitStatus();
+    const untrackedFiles = getUntrackedFiles();
+
+    if (!diff && !stagedDiff && !untrackedFiles) {
+      logger.warn("Nenhuma alteração encontrada no Git.");
+      return;
+    }
+
+    const prompt = buildPrompt({
+      config,
+      entry,
+      diff,
+      stagedDiff,
+      gitStatus,
+      untrackedFiles
+    });
+
+    const aiProvider = AiProvider.create(config);
+    const response = await aiProvider.generateContent(prompt);
+
+    await fs.mkdir("vibe-git/exit", { recursive: true });
+
+    const outputName = `${createSafeFileName(entry.branchName)}.md`;
+    const outputPath = path.join("vibe-git", "exit", outputName);
+
+    await fs.writeFile(outputPath, response, "utf-8");
+
+    logger.success(`Plano executado com sucesso`);
+  } catch (error) {
+    logger.error("Erro ao rodar a aplicação:", error);
+  }
+  
+}
