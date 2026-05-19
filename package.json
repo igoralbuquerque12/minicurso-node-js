@@ -1,0 +1,31 @@
+{
+  "name": "minicurso-node",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000m\u0000i\u0000n\u0000i\u0000c\u0000u\u0000r\u0000s\u0000o\u0000-\u0000n\u0000o\u0000d\u0000e\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "bin": {
+    "minicurso-node": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igoralbuquerque12/minicurso-node-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igoralbuquerque12/minicurso-node-js/issues"
+  },
+  "homepage": "https://github.com/igoralbuquerque12/minicurso-node-js#readme",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "dotenv": "^17.4.2"
+  }
+}
